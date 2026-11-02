@@ -104,6 +104,20 @@
       });
   }
 
+  // Stretch the big name to the full page width.
+  var fit = document.querySelector('.giant.fit');
+  if (fit) {
+    var fitNow = function () {
+      var span = fit.firstElementChild, cs = getComputedStyle(fit);
+      var avail = fit.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var w = span.getBoundingClientRect().width;
+      if (w) fit.style.fontSize = (parseFloat(cs.fontSize) * avail / w) + 'px';
+    };
+    fitNow();
+    if (document.fonts) document.fonts.ready.then(fitNow);
+    window.addEventListener('resize', fitNow);
+  }
+
   if (site.instagram) {
     var ig = document.getElementById('ig');
     if (ig) { ig.href = site.instagram; ig.hidden = false; }
