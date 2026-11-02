@@ -18,6 +18,7 @@ window.SITE = {
       name: "Client work",
       videos: [
         // { title: "Product reel", client: "Lasqala", link: "https://www.instagram.com/reel/ABC123/" },
+        { title: "Barbershop reel", client: "Culture Creations", link: "https://www.instagram.com/p/DfNFIR1Nbi5/" },
       ],
     },
     {
@@ -29,6 +30,7 @@ window.SITE = {
         { title: "We went to Paris", length: "18:57", id: "_btci4SYMl0" },
         { title: "36H of Work", length: "2:08", id: "Z1gawIKD06k" },
         { title: "Life in Meeting", length: "1:31", id: "g5FjjgJsZt4" },
+        { title: "Deventer was cute", link: "https://www.instagram.com/p/DejF0z1NtVN/" },
       ],
     },
     {
@@ -41,6 +43,8 @@ window.SITE = {
     {
       name: "Other projects",
       videos: [
+        { title: "Padel recap", client: "Peakz Padel", link: "https://www.instagram.com/p/DeL-0zXOV8-/" },
+        { title: "Meet the Degree Programme Committee", client: "GPCM Windesheim", link: "https://www.instagram.com/p/DV6QDkxiM__/" },
       ],
     },
   ],
