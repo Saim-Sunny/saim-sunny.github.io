@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>New article | Saim Sunny</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css?v=7">
+<style>
+  .w { display:grid; gap:18px; max-width:560px; margin-top:28px; }
+  .w label { display:grid; gap:6px; font-size:13px; font-weight:500; }
+  .w input, .w select { font:inherit; font-size:17px; padding:12px 14px; border:1px solid var(--ink); background:#fff; border-radius:0; }
+  .w button { font:inherit; font-size:16px; font-weight:600; padding:14px 18px; border:0; background:var(--red); color:#fff; cursor:pointer; justify-self:start; }
+  .tips { max-width:560px; margin-top:48px; display:grid; gap:12px; font-size:14px; line-height:1.5; }
+  .tips a { text-decoration:underline; text-underline-offset:3px; }
+  .tips code { background:var(--band); padding:1px 5px; }
+</style>
+</head>
+<body>
+<main class="sheet first" style="padding-top:40px">
+  <p class="label">Only for Saim &middot; you need to be logged in to GitHub</p>
+  <h1 class="head" style="margin-top:10px">New article</h1>
+  <form id="f" class="w">
+    <label>Title<input id="t" required placeholder="What I learned this week"></label>
+    <label>One-line summary<input id="s" placeholder="Shown on the Articles page"></label>
+    <label>Tag<select id="g"><option>Building</option><option>Reading</option><option>Productivity</option><option>Video</option><option>Projects</option><option value="">No tag</option></select></label>
+    <button type="submit">Start writing on GitHub &rarr;</button>
+  </form>
+  <div class="tips">
+    <p><strong>Then:</strong> write under the dashes and press <em>Commit changes</em>. It is live on the Articles page in about a minute.</p>
+    <p><strong>Formatting:</strong> empty line = new paragraph &middot; <code>**bold**</code> &middot; <code>## Heading</code> &middot; <code>- list</code> &middot; <code>[text](https://link)</code></p>
+    <p><strong>Photos:</strong> <a href="https://github.com/Saim-Sunny/saim-sunny.github.io/upload/main/images" target="_blank" rel="noopener">upload to the images folder</a>, then write <code>![](/images/name.jpg)</code>. For a cover photo, add <code>image: /images/name.jpg</code> under the tag line.</p>
+    <p><strong>Edit or delete:</strong> <a href="https://github.com/Saim-Sunny/saim-sunny.github.io/tree/main/_posts" target="_blank" rel="noopener">open your articles on GitHub</a>.</p>
+  </div>
+</main>
+<script>
+document.getElementById('f').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var q = function (s) { return '"' + s.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"'; };
+  var title = document.getElementById('t').value.trim();
+  var sum = document.getElementById('s').value.trim();
+  var tag = document.getElementById('g').value;
+  var d = new Date(), p = function (n) { return String(n).padStart(2, '0'); };
+  var date = d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+  var slug = title.toLowerCase().normalize('NFKD').replace(/[^\w\s-]/g, '').trim().replace(/[\s_]+/g, '-').slice(0, 60) || 'article';
+  var body = '---\ntitle: ' + q(title) + '\n' + (sum ? 'summary: ' + q(sum) + '\n' : '') + (tag ? 'tag: ' + tag + '\n' : '') + '---\n\nStart writing here.\n';
+  location.href = 'https://github.com/Saim-Sunny/saim-sunny.github.io/new/main/_posts?filename=' +
+    encodeURIComponent(date + '-' + slug + '.md') + '&value=' + encodeURIComponent(body);
+});
+</script>
+</body>
+</html>
