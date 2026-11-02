@@ -59,20 +59,71 @@
     return fig;
   }
 
-  var strip = document.getElementById('strip');
-  if (strip) {
-    var photo = strip.firstElementChild;
-    (site.strip || []).forEach(function (id, i) {
-      var v = byId(id);
-      if (!v) return;
-      var a = document.createElement('a');
-      a.className = 'strip-item';
-      a.href = 'video.html';
-      a.setAttribute('aria-label', v.title);
-      a.appendChild(thumb(v));
-      strip.insertBefore(a, i === 2 ? photo : null);
-    });
+
+  // Client work: YouTube plays here, Instagram and Facebook open on their own site.
+  function platformOf(url) {
+    if (/youtu\.?be/.test(url)) return 'YouTube';
+    if (/instagram\.com/.test(url)) return 'Instagram';
+    if (/facebook\.com|fb\.watch/.test(url)) return 'Facebook';
+    return 'Link';
   }
+  function ytId(url) {
+    var m = /(?:v=|youtu\.be\/|shorts\/|embed\/)([\w-]{11})/.exec(url);
+    return m ? m[1] : null;
+  }
+  var PAL = ['#e0150c', '#1d2a4d', '#e8841f', '#1d4f9c'];
+  function cover(i) {
+    var a = PAL[i % 4], b = PAL[(i + 1) % 4], c = PAL[(i + 2) % 4];
+    var x = 30 + (i * 37) % 40, y = 35 + (i * 23) % 30;
+    var svg = '<svg viewBox="0 0 160 90" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">' +
+      '<rect width="160" height="90" fill="#e9e6df"/>' +
+      '<circle cx="' + (x + 70) + '" cy="' + (y - 10) + '" r="46" fill="' + a + '"/>' +
+      '<circle cx="' + x + '" cy="' + (y + 30) + '" r="30" fill="' + b + '" opacity=".9"/>' +
+      '<circle cx="' + (x + 40) + '" cy="' + (y + 18) + '" r="6" fill="' + c + '"/>' +
+      '<path d="M-10 ' + (y + 70) + ' Q80 ' + (y - 40) + ' 170 ' + (y + 40) + '" stroke="#1d2a4d" fill="none" stroke-width=".8"/>' +
+      '</svg>';
+    var img = new Image();
+    img.alt = '';
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    return img;
+  }
+  function clientTile(c, i) {
+    var p = platformOf(c.link), id = p === 'YouTube' ? ytId(c.link) : null;
+    if (id) {
+      var f = tile({ id: id, title: c.title, length: c.client, group: 'Client work' }, false);
+      f.querySelector('.cap-len').textContent = c.client || '';
+      return f;
+    }
+    var fig = document.createElement('figure');
+    fig.dataset.group = 'Client work';
+    var a = document.createElement('a');
+    a.className = 'tile has-img';
+    a.href = c.link;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.setAttribute('aria-label', 'Watch ' + c.title + ' on ' + p);
+    if (c.thumb) { var im = new Image(); im.alt = ''; im.src = c.thumb; a.appendChild(im); }
+    else a.appendChild(cover(i));
+    var tag = document.createElement('span');
+    tag.className = 'tag';
+    tag.textContent = p + ' \u2197';
+    a.appendChild(tag);
+    fig.appendChild(a);
+    var cap = document.createElement('figcaption');
+    cap.innerHTML = '<span class="cap-title"></span><span class="cap-len"></span>';
+    cap.firstChild.textContent = c.title;
+    cap.lastChild.textContent = c.client || '';
+    fig.appendChild(cap);
+    return fig;
+  }
+  var clients = site.clients || [];
+  document.querySelectorAll('[data-clients]').forEach(function (box) {
+    if (!clients.length) return;
+    var max = parseInt(box.getAttribute('data-clients'), 10) || clients.length;
+    clients.slice(0, max).forEach(function (c, i) { box.appendChild(clientTile(c, i)); });
+    var sec = box.closest('[hidden]');
+    if (sec) sec.hidden = false;
+  });
 
   var feat = document.getElementById('featured');
   if (feat && site.featured) feat.appendChild(tile(site.featured, true));
