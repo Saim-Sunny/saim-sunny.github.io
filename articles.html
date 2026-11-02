@@ -1,0 +1,42 @@
+---
+nav: articles
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saim Sunny | Articles</title>
+<meta name="description" content="Notes by Saim Sunny on projects, tools, books and the way he works.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Saim Sunny | Articles">
+<meta property="og:description" content="Notes by Saim Sunny on projects, tools, books and the way he works.">
+<meta property="og:image" content="https://saimsunny.net/saim.jpg">
+<link rel="stylesheet" href="/style.css?v=7">
+</head>
+<body>
+{% include header.html %}
+<main>
+  <h1 class="giant small">Articles</h1>
+  <section class="sheet first">
+    <p class="intro">What I am building, reading and learning.</p>
+    <ul class="cards">
+      {% for post in site.posts %}
+      <li class="card">
+        <a href="{{ post.url }}">
+          {% if post.image %}<img src="{{ post.image }}" alt="" loading="lazy">{% else %}<span class="card-art n{{ forloop.index | modulo: 4 }}"></span>{% endif %}
+          <span class="label">{{ post.date | date: "%-d %B %Y" }}{% if post.tag %} &middot; {{ post.tag }}{% endif %}</span>
+          <strong>{{ post.title }}</strong>
+          {% if post.summary %}<span class="sum">{{ post.summary }}</span>{% endif %}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+</main>
+
+{% include footer.html %}
+</body>
+</html>

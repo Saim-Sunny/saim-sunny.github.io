@@ -1,49 +1,33 @@
+---
+nav: video
+---
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Saim Sunny | Video portfolio</title>
-<meta name="description" content="Saim Sunny is a project manager and videographer studying Global Project and Change Management in Zwolle, the Netherlands.">
+<meta name="description" content="Client work, films and projects by Saim Sunny, videographer and video editor in Zwolle.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="Saim Sunny">
-<meta property="og:description" content="Project manager and videographer in Zwolle, the Netherlands.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Saim Sunny | Video portfolio">
+<meta property="og:description" content="Client work, films and projects by Saim Sunny, videographer and video editor in Zwolle.">
 <meta property="og:image" content="https://saimsunny.net/saim.jpg">
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="/style.css?v=7">
 </head>
 <body>
-<header class="top">
-  <a class="mark" href="index.html">Saim Sunny</a>
-  <nav><a href="index.html#projects">Projects</a><a href="video.html" class="on">Video portfolio</a><a href="index.html#experience">Experience</a><a href="#contact">Contact</a></nav>
-  <span class="place">Zwolle, NL</span>
-</header>
+{% include header.html %}
 <main>
-  <h1 class="giant">Video portfolio</h1>
-  <section id="client-work" class="sheet first" hidden>
-    <h2 class="head">Client work</h2>
-    <div class="cgrid" data-clients></div>
-  </section>
+  <h1 class="giant small">Video portfolio</h1>
   <section class="sheet first">
-    <h2 class="head sub">Personal films</h2>
     <div id="filters" class="filters" role="group" aria-label="Filter videos"></div>
     <div id="groups" class="vgrid"></div>
     <a class="arrow more" href="https://www.youtube.com/@Saim_Sunny/videos" target="_blank" rel="noopener">Full YouTube channel &rarr;</a>
   </section>
 </main>
+<div id="player" class="player" hidden><button type="button" class="close" aria-label="Close">Close &times;</button><div class="frame"></div></div>
 
-<footer id="contact" class="foot">
-  <p class="label">Contact</p>
-  <p class="mail">saimsunny737@gmail.com</p>
-  <p class="foot-links">
-    <a href="mailto:saimsunny737@gmail.com">Email</a>
-    <a href="https://www.linkedin.com/in/saim-sunny-961314290/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://www.youtube.com/@Saim_Sunny" target="_blank" rel="noopener">YouTube</a>
-    <a id="ig" href="#" target="_blank" rel="noopener" hidden>Instagram</a>
-  </p>
-</footer>
-<script src="videos.js?v=6"></script>
-<script src="site.js?v=6"></script>
+{% include footer.html %}
 </body>
 </html>

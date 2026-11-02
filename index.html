@@ -1,3 +1,6 @@
+---
+nav: home
+---
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,20 +10,16 @@
 <meta name="description" content="Saim Sunny is a project manager and videographer studying Global Project and Change Management in Zwolle, the Netherlands.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta property="og:title" content="Saim Sunny">
-<meta property="og:description" content="Project manager and videographer in Zwolle, the Netherlands.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Saim Sunny | Project manager and videographer">
+<meta property="og:description" content="Saim Sunny is a project manager and videographer studying Global Project and Change Management in Zwolle, the Netherlands.">
 <meta property="og:image" content="https://saimsunny.net/saim.jpg">
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="/style.css?v=7">
 </head>
 <body>
-<header class="top">
-  <a class="mark" href="index.html">Saim Sunny</a>
-  <nav><a href="index.html#projects">Projects</a><a href="video.html">Video portfolio</a><a href="index.html#experience">Experience</a><a href="#contact">Contact</a></nav>
-  <span class="place">Zwolle, NL</span>
-</header>
+{% include header.html %}
 <main>
-  <h1 class="giant fit"><span>Saim Sunny</span></h1>
+  <h1 class="giant">Saim Sunny</h1>
 
   <div class="art">
     <svg viewBox="0 0 1600 640" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Geometric artwork with a portrait of Saim Sunny">
@@ -124,23 +123,24 @@
     </div>
   </section>
 
-  <section id="clients" class="sheet" hidden>
-    <div class="head-row">
-      <h2 class="head">Client work</h2>
-      <a class="arrow" href="video.html#client-work">All client work &rarr;</a>
-    </div>
-    <div class="cgrid" data-clients="6"></div>
-  </section>
-
   <section id="video" class="sheet">
     <div class="head-row">
       <h2 class="head">Video</h2>
-      <a class="arrow" href="video.html">Video portfolio &rarr;</a>
+      <a class="arrow" href="/video.html">All video work &rarr;</a>
     </div>
-    <div class="selected">
-      <div id="featured" class="sel-big"></div>
-      <div id="picks" class="sel-small"></div>
+    <div id="home-videos" class="trio"></div>
+  </section>
+
+  <section id="articles" class="sheet">
+    <div class="head-row">
+      <h2 class="head">Articles</h2>
+      <a class="arrow" href="/articles.html">All articles &rarr;</a>
     </div>
+    <ul class="rows posts">
+      {% for post in site.posts limit:3 %}
+      <li><span>{{ post.date | date: "%-d.%-m.%Y" }}</span><strong><a href="{{ post.url }}">{{ post.title }}</a></strong><span>{{ post.summary }}</span></li>
+      {% endfor %}
+    </ul>
   </section>
 
   <section id="experience" class="sheet">
@@ -154,17 +154,6 @@
   </section>
 </main>
 
-<footer id="contact" class="foot">
-  <p class="label">Contact</p>
-  <p class="mail">saimsunny737@gmail.com</p>
-  <p class="foot-links">
-    <a href="mailto:saimsunny737@gmail.com">Email</a>
-    <a href="https://www.linkedin.com/in/saim-sunny-961314290/" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="https://www.youtube.com/@Saim_Sunny" target="_blank" rel="noopener">YouTube</a>
-    <a id="ig" href="#" target="_blank" rel="noopener" hidden>Instagram</a>
-  </p>
-</footer>
-<script src="videos.js?v=6"></script>
-<script src="site.js?v=6"></script>
+{% include footer.html %}
 </body>
 </html>
