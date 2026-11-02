@@ -4,98 +4,104 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Saim Sunny | Project manager and videographer</title>
-<meta name="description" content="Saim Sunny is a videographer and project and change management student in Zwolle, the Netherlands.">
+<meta name="description" content="Saim Sunny is a project manager and videographer studying Global Project and Change Management in Zwolle, the Netherlands.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Instrument+Sans:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="Saim Sunny">
-<meta property="og:description" content="Videographer and project manager in Zwolle, the Netherlands.">
+<meta property="og:description" content="Project manager and videographer in Zwolle, the Netherlands.">
 <meta property="og:image" content="https://saimsunny.net/saim.jpg">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="hero wrap">
-  <nav>
-    <a href="#projects">Projects</a>
-    <a href="video.html">Video portfolio</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <div class="hero-grid">
-    <div>
-      <h1>Saim<br>Sunny</h1>
-      <p class="lead">Project manager and videographer, studying Global Project and Change Management in Zwolle.</p>
-      <div class="doors">
-        <a class="btn" href="#projects">Project work</a>
-        <a class="btn btn-red" href="video.html">Video portfolio</a>
-      </div>
-    </div>
-    <div class="portrait">
-      <div class="sun" aria-hidden="true"></div>
-      <img src="saim.jpg" alt="Portrait of Saim Sunny" width="410" height="615">
-    </div>
-  </div>
+<header class="top">
+  <a class="mark" href="index.html">Saim Sunny</a>
+  <nav><a href="index.html#projects">Projects</a><a href="video.html">Video portfolio</a><a href="index.html#experience">Experience</a><a href="#contact">Contact</a></nav>
+  <span class="place">Zwolle, NL</span>
 </header>
-<div class="stripes" aria-hidden="true"></div>
-
 <main>
-  <section id="projects" class="wrap">
-    <h2>Projects</h2>
-    <ol class="list">
-      <li>
-        <span class="when">2026</span>
-        <div>
-          <h3>Value Chain Hackers</h3>
-          <p>Mapped the Dutch e-bike battery value chain and designed a Digital Handover Tool concept for the 2027 EU Battery Passport.</p>
-        </div>
-      </li>
-      <li>
-        <span class="when">2025&ndash;26</span>
-        <div>
-          <h3>RecyCool</h3>
-          <p>Turned business waste streams into product concepts in a team of four. I owned the visual design.</p>
-        </div>
-      </li>
-      <li>
-        <span class="when">2024&ndash;25</span>
-        <div>
-          <h3>Creative Calm</h3>
-          <p>Strategy Lead in a team of five. We delivered two workshops to reduce student loneliness at Cibap.</p>
-        </div>
-      </li>
-    </ol>
+  <h1 class="giant">Saim Sunny</h1>
+
+  <div id="strip" class="strip">
+    <a class="strip-photo" href="#about" aria-label="About Saim"><img src="saim.jpg" alt="Portrait of Saim Sunny"></a>
+  </div>
+
+  <section class="statement">
+    <span class="side">Project manager</span>
+    <p>I organise projects and make films, and I want to do more of both.</p>
+    <span class="side">Videographer</span>
   </section>
 
-  <div class="dots" aria-hidden="true"></div>
-
-  <section id="video" class="wrap">
-    <h2>Video work</h2>
-    <p class="note">I make documentaries, vlogs and event films, and I led the editors at a Dutch wedding film company.</p>
-    <div id="featured"></div>
-    <div id="picks" class="grid"></div>
-    <p class="more"><a class="btn" href="video.html">See the video portfolio</a></p>
+  <section id="about" class="band">
+    <div class="band-text">
+      <p class="label">About</p>
+      <p class="band-lead">I am a third-year Global Project and Change Management student at Windesheim Honours College in Zwolle. I work on circular economy projects for real clients, and I studied journalism, media and communication before that.</p>
+      <p class="langs">English, fluent. Dutch, conversational. Bangla, native.</p>
+    </div>
+    <img class="band-img" src="saim.jpg" alt="" width="410" height="615">
   </section>
 
-  <section id="experience" class="wrap">
-    <h2>Experience</h2>
-    <ol class="list">
-      <li><span class="when">2025&ndash;26</span><div><h3>Lead Video Editor, The Wedding Scene</h3><p>Led a team of 3&ndash;5 editors.</p></div></li>
-      <li><span class="when">2024&ndash;26</span><div><h3>Social Media Manager, Lasqala</h3></div></li>
-      <li><span class="when">2023&ndash;24</span><div><h3>Festival Director, CDSTF</h3><p>Led 8 managers and 63 volunteers.</p></div></li>
-      <li><span class="when">Now</span><div><h3>PR Committee, UNICEF Student Zwolle</h3></div></li>
-    </ol>
+  <section id="projects" class="sheet">
+    <h2 class="head">Projects</h2>
+    <div class="cases">
+      <article class="case">
+        <p class="label">Mini-internship</p>
+        <h3>Value Chain Hackers<br>2.2026 &mdash; 6.2026</h3>
+        <p class="short">Dutch e-bike battery value chain</p>
+        <p class="long">I mapped the chain to find bottlenecks in collection and recycling, designed a Digital Handover Tool concept for the 2027 EU Battery Passport, wrote a Theory of Change and co-pitched a second-life battery concept.</p>
+      </article>
+      <article class="case">
+        <p class="label">Client project</p>
+        <h3>RecyCool<br>2025 &mdash; 2026</h3>
+        <p class="short">For Versnellingshoeve &rsquo;t Kiemt</p>
+        <p class="long">A team of four turning business waste streams into product concepts. We ran two co-creation sessions with entrepreneurs and experts. I owned the visual design.</p>
+      </article>
+      <article class="case">
+        <p class="label">Client project</p>
+        <h3>Creative Calm<br>2024 &mdash; 2025</h3>
+        <p class="short">For Cibap, Zwolle</p>
+        <p class="long">I was Strategy Lead in a team of five. We delivered two workshops to reduce student loneliness.</p>
+      </article>
+      <article class="case">
+        <p class="label">Course assignment</p>
+        <h3>IPMA project plan<br>Windesheim</h3>
+        <p class="short">40-week plan</p>
+        <p class="long">A full project plan with stakeholder and risk matrices.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="video" class="sheet">
+    <div class="head-row">
+      <h2 class="head">Video</h2>
+      <a class="arrow" href="video.html">Video portfolio &rarr;</a>
+    </div>
+    <div class="selected">
+      <div id="featured" class="sel-big"></div>
+      <div id="picks" class="sel-small"></div>
+    </div>
+  </section>
+
+  <section id="experience" class="sheet">
+    <h2 class="head">Experience</h2>
+    <ul class="rows">
+      <li><span>2025 &mdash; 26</span><strong>Lead Video Editor</strong><span>The Wedding Scene</span><span>Led 3&ndash;5 editors</span></li>
+      <li><span>2024 &mdash; 26</span><strong>Social Media Manager</strong><span>Lasqala</span><span></span></li>
+      <li><span>2023 &mdash; 24</span><strong>Festival Director</strong><span>CDSTF</span><span>8 managers, 63 volunteers</span></li>
+      <li><span>Now</span><strong>PR Committee</strong><span>UNICEF Student Zwolle</span><span></span></li>
+    </ul>
   </section>
 </main>
 
-<footer id="contact">
-  <div class="wrap">
-    <h2>Say hello</h2>
-    <p><a class="mail" href="mailto:saimsunny737@gmail.com">saimsunny737@gmail.com</a></p>
-    <p class="links-plain">
-      <a href="https://www.linkedin.com/in/saim-sunny-961314290/">LinkedIn</a>
-      <a href="https://www.youtube.com/@Saim_Sunny">YouTube</a>
-      <a id="ig" href="#" hidden>Instagram</a>
-    </p>
-  </div>
+<footer id="contact" class="foot">
+  <p class="label">Contact</p>
+  <p class="mail">saimsunny737@gmail.com</p>
+  <p class="foot-links">
+    <a href="mailto:saimsunny737@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/saim-sunny-961314290/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.youtube.com/@Saim_Sunny" target="_blank" rel="noopener">YouTube</a>
+    <a id="ig" href="#" target="_blank" rel="noopener" hidden>Instagram</a>
+  </p>
 </footer>
 <script src="videos.js"></script>
 <script src="site.js"></script>

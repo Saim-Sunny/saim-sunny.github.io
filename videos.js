@@ -6,6 +6,9 @@ window.SITE = {
 
   featured: { title: "I made a film about our trip", length: "29:54", id: "vGT17Y8J1fg" },
 
+  // The row of images at the top of the home page
+  strip: ["vGT17Y8J1fg", "AOc-qHYJToY", "_btci4SYMl0", "DpNEQ2we0fQ", "sTonugWrb3Q"],
+
   // The three smaller videos on the home page
   picks: ["AOc-qHYJToY", "_btci4SYMl0", "DpNEQ2we0fQ"],
 

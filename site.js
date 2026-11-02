@@ -2,39 +2,38 @@
   var site = window.SITE || {};
   // Players only work on the real site. Anywhere else, videos open on YouTube.
   var canEmbed = /(^|\.)saimsunny\.net$|github\.io$/.test(location.hostname);
+  var groups = site.groups || [];
+  var all = [];
+  if (site.featured) all.push(Object.assign({ group: 'Films and vlogs' }, site.featured));
+  groups.forEach(function (g) {
+    g.videos.forEach(function (v) { all.push(Object.assign({ group: g.name }, v)); });
+  });
+  function byId(id) { return all.filter(function (v) { return v.id === id; })[0]; }
 
-  function tile(v, big) {
+  function thumb(v, sharp) {
+    var img = new Image();
+    img.alt = '';
+    var base = 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/';
+    img.onload = function () {
+      // YouTube serves a tiny placeholder when the large thumbnail does not exist.
+      if (img.naturalWidth < 200 && img.src.indexOf('maxres') > -1) { img.src = base + 'hqdefault.jpg'; return; }
+      img.parentNode.classList.add('has-img');
+    };
+    img.onerror = function () { if (img.src.indexOf('maxres') > -1) img.src = base + 'hqdefault.jpg'; };
+    img.src = base + (sharp ? 'maxresdefault.jpg' : 'hqdefault.jpg');
+    return img;
+  }
+
+  function tile(v, sharp) {
     var fig = document.createElement('figure');
-    if (big) fig.className = 'big';
+    fig.dataset.group = v.group || '';
     var a = document.createElement('a');
     a.className = 'tile';
     a.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(v.id);
     a.target = '_blank';
     a.rel = 'noopener';
     a.setAttribute('aria-label', 'Play ' + v.title);
-
-    var word = document.createElement('span');
-    word.className = 'tile-title';
-    word.textContent = v.title;
-    a.appendChild(word);
-
-    var img = new Image();
-    img.alt = '';
-    img.loading = 'lazy';
-    img.onload = function () { a.classList.add('has-img'); };
-    img.src = 'https://i.ytimg.com/vi/' + encodeURIComponent(v.id) + '/hqdefault.jpg';
-    a.appendChild(img);
-
-    var play = document.createElement('span');
-    play.className = 'play';
-    play.setAttribute('aria-hidden', 'true');
-    a.appendChild(play);
-
-    var len = document.createElement('span');
-    len.className = 'len';
-    len.textContent = v.length;
-    a.appendChild(len);
-
+    a.appendChild(thumb(v, sharp));
     if (canEmbed) {
       a.addEventListener('click', function (e) {
         e.preventDefault();
@@ -46,43 +45,67 @@
         a.replaceWith(f);
       });
     }
-
     fig.appendChild(a);
     var cap = document.createElement('figcaption');
-    cap.textContent = v.title;
+    var t = document.createElement('span');
+    t.className = 'cap-title';
+    t.textContent = v.title;
+    var l = document.createElement('span');
+    l.className = 'cap-len';
+    l.textContent = v.length;
+    cap.appendChild(t);
+    cap.appendChild(l);
     fig.appendChild(cap);
     return fig;
+  }
+
+  var strip = document.getElementById('strip');
+  if (strip) {
+    var photo = strip.firstElementChild;
+    (site.strip || []).forEach(function (id, i) {
+      var v = byId(id);
+      if (!v) return;
+      var a = document.createElement('a');
+      a.className = 'strip-item';
+      a.href = 'video.html';
+      a.setAttribute('aria-label', v.title);
+      a.appendChild(thumb(v));
+      strip.insertBefore(a, i === 2 ? photo : null);
+    });
   }
 
   var feat = document.getElementById('featured');
   if (feat && site.featured) feat.appendChild(tile(site.featured, true));
 
   var picks = document.getElementById('picks');
-  if (picks) {
-    var all = [];
-    (site.groups || []).forEach(function (g) { all = all.concat(g.videos); });
-    (site.picks || []).forEach(function (id) {
-      var v = all.filter(function (x) { return x.id === id; })[0];
-      if (v) picks.appendChild(tile(v));
-    });
-  }
-
-  var groups = document.getElementById('groups');
-  if (groups) (site.groups || []).forEach(function (g) {
-    if (!g.videos.length) return;
-    var h = document.createElement('h3');
-    h.className = 'group';
-    h.textContent = g.name;
-    groups.appendChild(h);
-    var grid = document.createElement('div');
-    grid.className = 'grid';
-    g.videos.forEach(function (v) { grid.appendChild(tile(v)); });
-    groups.appendChild(grid);
+  if (picks) (site.picks || []).forEach(function (id) {
+    var v = byId(id);
+    if (v) picks.appendChild(tile(v));
   });
+
+  var grid = document.getElementById('groups');
+  if (grid) {
+    all.forEach(function (v) { grid.appendChild(tile(v, v === all[0])); });
+    grid.firstElementChild.classList.add('wide');
+    var box = document.getElementById('filters');
+    ['All'].concat(groups.filter(function (g) { return g.videos.length; }).map(function (g) { return g.name; }))
+      .forEach(function (name) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = name;
+        b.setAttribute('aria-pressed', name === 'All');
+        b.addEventListener('click', function () {
+          box.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+          grid.querySelectorAll('figure').forEach(function (f) {
+            f.hidden = name !== 'All' && f.dataset.group !== name;
+          });
+        });
+        box.appendChild(b);
+      });
+  }
 
   if (site.instagram) {
     var ig = document.getElementById('ig');
-    if (ig) ig.href = site.instagram;
-    if (ig) ig.hidden = false;
+    if (ig) { ig.href = site.instagram; ig.hidden = false; }
   }
 })();
