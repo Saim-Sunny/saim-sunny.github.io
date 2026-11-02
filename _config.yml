@@ -1,8 +1,7 @@
 title: Saim Sunny
 url: https://saimsunny.net
-permalink: /articles/:title/
 markdown: kramdown
 defaults:
   - scope: { path: "", type: posts }
-    values: { layout: article, nav: articles }
+    values: { layout: article, nav: articles, permalink: "/articles/:title/" }
 exclude: [README.md, HOW-TO-POST.md]
